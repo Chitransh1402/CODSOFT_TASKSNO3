@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111218" />
+  <title>Waveform — Music Player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Waveform home"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span>waveform<span class="brand-dot">.</span></span></a>
+      <div class="side-label">MENU</div>
+      <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span> Home</button>
+      <button class="nav-item" data-view="library"><span class="nav-icon">▤</span> Your library</button>
+      <button class="nav-item" data-view="favorites"><span class="nav-icon">♡</span> Favorites <span class="nav-count" id="favoriteCount">0</span></button>
+      <div class="side-label playlist-heading">YOUR PLAYLISTS <button id="newPlaylist" title="Create playlist">＋</button></div>
+      <div id="playlistNav" class="playlist-nav"></div>
+      <div class="sidebar-bottom">
+        <div class="upgrade-card"><div class="upgrade-orb">♫</div><strong>Your sound, your space.</strong><p>Bring your own music and make it yours.</p><button id="uploadSide">＋ Add music</button></div>
+        <div class="profile"><div class="avatar">W</div><div><strong>Music listener</strong><small>Free account</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark"><i></i><i></i><i></i><i></i></span> waveform<span class="brand-dot">.</span></div>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search songs, artists..." aria-label="Search songs and artists"><kbd>⌘ K</kbd></div>
+        <div class="top-actions"><button class="icon-button" id="uploadTop" title="Add audio files">＋</button><button class="user-chip"><span class="avatar small">W</span><span>Listener</span><span>⌄</span></button></div>
+      </header>
+
+      <section class="welcome-row">
+        <div><div class="eyebrow"><span class="live-dot"></span> YOUR PERSONAL SOUNDTRACK</div><h1>Music for your<br><span>every moment.</span></h1><p class="welcome-copy">Good music. Good mood. Press play.</p><button class="primary-button" id="heroPlay"><span>▶</span> Play something</button></div>
+        <div class="hero-art" aria-hidden="true"><div class="hero-ring ring-one"></div><div class="hero-ring ring-two"></div><div class="hero-disc"><div class="disc-label">WF<span>♫</span></div></div><div class="floating-note note-one">♪</div><div class="floating-note note-two">♫</div><div class="sound-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      </section>
+
+      <section class="section" id="recentSection"><div class="section-heading"><div><div class="eyebrow">PICK UP WHERE YOU LEFT OFF</div><h2>Recently played <span class="heading-spark">✳</span></h2></div><button class="text-button" id="seeAll">View all <span>↗</span></button></div><div class="track-grid" id="trackGrid"></div></section>
+
+      <section class="section playlist-section"><div class="section-heading"><div><div class="eyebrow">MADE FOR YOUR MOOD</div><h2>Your rotation</h2></div><button class="text-button" id="shuffleAll">Shuffle all <span>⤨</span></button></div><div class="rotation-card"><div class="rotation-cover cover-purple"><span>AFTER<br>HOURS</span><div class="cover-sun"></div></div><div class="rotation-info"><span class="pill">YOUR MIX</span><h3>Late night feelings</h3><p>A little calm, a little energy — whatever the moment needs.</p><div class="rotation-meta"><span id="rotationSongCount">0 tracks</span><span>•</span><span>Updated just now</span></div></div><button class="round-play" id="rotationPlay" aria-label="Play rotation">▶</button></div></section>
+
+      <section class="section library-section" id="librarySection"><div class="section-heading"><div><div class="eyebrow">ALL YOUR FAVORITES</div><h2 id="listHeading">All tracks</h2></div><label class="file-button">＋ Import music<input id="fileInput" type="file" accept="audio/*" multiple hidden></label></div><div class="table-wrap"><table><thead><tr><th>#</th><th>TRACK</th><th>ALBUM</th><th>DATE ADDED</th><th>♡</th><th>TIME</th></tr></thead><tbody id="trackTable"></tbody></table><div id="emptyState" class="empty-state"><div class="empty-icon">♫</div><h3>Your library is waiting</h3><p>Import MP3, WAV, OGG, or other audio files from your device to get started.</p><label class="primary-button file-button">＋ Choose audio files<input id="emptyFileInput" type="file" accept="audio/*" multiple hidden></label></div></div></section>
+      <footer><span>Made for the love of music.</span><span>WAVEFORM <b>●</b> PLAYER</span></footer>
+    </main>
+  </div>
+
+  <div class="player-bar">
+    <div class="now-playing"><div id="miniArtwork" class="mini-art"><span>♫</span></div><div class="now-text"><strong id="nowTitle">Nothing playing yet</strong><span id="nowArtist">Add a song to begin</span></div><button id="nowFavorite" class="heart-button" title="Add to favorites">♡</button></div>
+    <div class="player-center"><div class="controls"><button class="control-button" id="shuffleButton" title="Shuffle" aria-label="Shuffle">⤨</button><button class="control-button" id="prevButton" title="Previous" aria-label="Previous">|◀</button><button class="play-button" id="playButton" title="Play" aria-label="Play">▶</button><button class="control-button" id="nextButton" title="Next" aria-label="Next">▶|</button><button class="control-button" id="repeatButton" title="Repeat off" aria-label="Repeat">↻</button></div><div class="timeline"><span id="currentTime">0:00</span><input id="seekBar" type="range" min="0" max="100" value="0" aria-label="Seek playback"><span id="duration">0:00</span></div></div>
+    <div class="player-right"><span class="volume-icon">◖))</span><button id="muteButton" class="control-button" title="Mute" aria-label="Mute">◖))</button><input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume"><button id="queueButton" class="control-button queue-button" title="Show playlist">☷</button></div>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <audio id="audio" preload="metadata"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
